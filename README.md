@@ -19,8 +19,73 @@
 ### Step 7: For all the animal prefabs and food in th inspector (below the  layer ) drop down the override option and choose apply all.
 
 ## Program:
+## SPAWN MANAGER
+~~~
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpawnManager : MonoBehaviour
+{
+    public GameObject[] animalPrefabs;
+    private float spawnRangex = 20;
+    private float spawnPosZ = 20;
+    private float startDelay = 2;
+    public float spawnInterval=1.5f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        InvokeRepeating("SpawnRandomAnimal", startDelay, spawnInterval);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SpawnRandomAnimal();
+        }
+    }
+    void SpawnRandomAnimal()
+    {
+        int animalIndex = Random.Range(0, animalPrefabs.Length);
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 0, spawnPosZ);
+        Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
+    }
+}
+
+~~~
+## DETECT COLLISION
+~~~
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DetectCollider : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+        Destroy(other.gameObject);
+    }
+}
+
+~~~
 
 ## Output:
+![image](https://github.com/sasidharan403/Animal-Feeding-Phase-II/assets/94154712/c6a5e5db-951d-4d94-8a01-8de5940aaf14)
 
 ## Result:
+Animal feeding game-Phase-2 using unity is developed successfully
 
